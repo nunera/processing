@@ -1,0 +1,19 @@
+def setup():
+    background("#232323")
+    size(500,500)
+    bounds = [[450,450],[500,500]]
+    level = 450
+    start = 450
+    for i in range(50):
+      for i in range(50):
+          noStroke()
+          color1 = (start-450)/0.196078431
+          color2 = (level-450)/0.196078431
+          fill(color1,color2,color2*color1)
+          circle(start,level,1)
+          start+=1
+      level+=1
+      start=450
+    
+def findColor():
+    

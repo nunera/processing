@@ -22,10 +22,7 @@ def setup():
           start+=1
       level+=1
       start=450
-    
-def findColor():
-    bounds = [[450,450],[500,500]]
-    
+
 def draw():
     bounds = [[450,450],[500,500]]
     if mousePressed:

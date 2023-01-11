@@ -7,10 +7,11 @@ def setup():
     global rgb
     rgb = [255,255,255]
     fill(255,255,255)
+    square(450,450,50)
     circle(450,50,50)
     fill(0,0,0,0)
     stroke(255)
-    square(449,449,50)
+    square(450,449,50)
     for i in range(50):
       for i in range(50):
           noStroke()
@@ -21,7 +22,6 @@ def setup():
           start+=1
       level+=1
       start=450
-    return(bounds)
     
 def findColor():
     bounds = [[450,450],[500,500]]
@@ -38,4 +38,4 @@ def draw():
             rgb = [color1-color2,color2-color1,(color2*color1)*0.00408326661]
         else:
             stroke(rgb[0],rgb[1],rgb[2])
-            line(pmouseX,pmouseY,mouseX,mouseY
+            line(pmouseX,pmouseY,mouseX,mouseY)

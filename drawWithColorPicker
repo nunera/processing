@@ -1,19 +1,43 @@
+import time
 def setup():
     background("#232323")
     size(500,500)
     bounds = [[450,450],[500,500]]
-    level = 450
-    start = 450
+    level = bounds[0][0]
+    start = bounds[0][1]
+    global rgb
+    rgb = [40,40,40]
+    fill(40,40,40)
+    circle(450,50,50)
     for i in range(50):
       for i in range(50):
           noStroke()
-          color1 = (start-450)/0.196078431
-          color2 = (level-450)/0.196078431
-          fill(color1,color2,color2*color1)
+          color1 = (start-bounds[0][0])/0.196078431
+          color2 = (level-bounds[0][1])/0.196078431
+          fill(color1-color2,color2-color1,(color2*color1)*0.00408326661)
           circle(start,level,1)
           start+=1
       level+=1
       start=450
+    return(bounds)
     
 def findColor():
+    bounds = [[450,450],[500,500]]
     
+def draw():
+    bounds = [[450,450],[500,500]]
+    if mousePressed:
+        if (mouseX > bounds[0][0] and mouseX < bounds[1][0]) and (mouseY > bounds[0][1] and mouseY < bounds[1][1]):
+            color1 = (mouseX-bounds[0][0])/0.196078431
+            color2 = (mouseY-bounds[0][1])/0.196078431
+            fill(color1-color2,color2-color1,(color2*color1)*0.00408326661)
+            circle(450,50,50)
+            global rgb
+            rgb = [color1-color2,color2-color1,(color2*color1)*0.00408326661]
+            
+def mousePressed():
+    while mousePressed:
+        print(mouseX)
+        time.sleep(.1)
+def mouseReleased():
+    print("up")

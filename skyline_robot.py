@@ -1,8 +1,26 @@
-def building(distance,hight,w,z):
-    h = (hight-(z*20))
+def gen():
+        fill("#111111")
+        building(220,400,100,2.7)
+        building(100,300,75,2.5)
+        building(410,200,100,2.4)
+        building(170,135,100,2.25)
+        building(160,450,100,2)
+        building(350,450,130,1.5)
+        
+def hill(distance,Height):
+    stroke(0)
+    strokeWeight(2)
+def building(distance,Height,w,z):
+    stroke(0)
+    strokeWeight(2)
+    h = (Height-(z*20))
     fill((z*70-100)%255)
-    rect(((-1*(float(1)/z))*time)+distance+800,450-h,w,h)
-wasdclick = [0,0,0,0,0]
+    rect(((((-1*(float(1)/z))*time)+distance+800)%1500)-125,450-h,w,(h+55)-(z*20))
+    for u in range(int(h/30)):
+        for i in range(w/30):
+            fill("#A3eEF8")
+            rect(((((-1*(float(1)/z))*time)+distance+810+(i*30))%1500)-125,460-h+(u*30),20,20)
+wasdclick = [0,0]
 gamephase = 0
 debug = True
 # 0 = Main Menu, 1 = Options, 2 = Game, 3 = Game over screen
@@ -27,7 +45,7 @@ def draw():
         textAlign(CENTER)
         text("Start",width/2,210)
         text("Settings",width/2,290)
-        if wasdclick[4] == 1:
+        if wasdclick[1] == 1:
             if mouseX > 360 and mouseY > 185 and mouseX < 440 and mouseY < 220:
                gamephase = 2
             elif mouseX > 345 and mouseY > 260 and mouseX < 460 and mouseY < 300:
@@ -49,12 +67,15 @@ def draw():
         textAlign(CENTER)
         text(speed,circX,225)
         textSize(32)
-        if mouseX > 350 and mouseY > 150 and mouseX < 550 and mouseY < 230 and wasdclick[4] == 1:
+        if mouseX > 350 and mouseY > 150 and mouseX < 550 and mouseY < 230 and wasdclick[1] == 1:
             circX = mouseX
-            speed = ((mouseX/float(200)) - 1)
+            if debug:
+                speed = ((mouseX/float(20)) - 19) 
+            else:
+                speed = ((mouseX/float(200)) - 1)
         textAlign(CENTER)
         text("Return",width/2,340)
-        if mouseX > 345 and mouseY > 310 and mouseX < 460 and mouseY < 350 and wasdclick[4] == 1:
+        if mouseX > 345 and mouseY > 310 and mouseX < 460 and mouseY < 350 and wasdclick[1] == 1:
             gamephase = 0
     elif gamephase == 2:
         global time
@@ -67,14 +88,11 @@ def draw():
         rect((-1*time)+800,0,time,time+600) 
         fill("#32801b")
         rect((-1*time)+800,450,time,50)
-        fill("#111111")
-        building(220,400,100,2.5)
-        building(210,200,100,2.25)
-        building(200,450,100,2)
+        gen()
         fill("#111111")
         rect(15,10,25,10)
         triangle(15,5,15,25,5,15)
-        if mouseX < 50 and mouseY < 50 and wasdclick[4] == 1:
+        if mouseX < 50 and mouseY < 50 and wasdclick[1] == 1:
             background("#232323")
             m = 0
             t = False
@@ -86,27 +104,15 @@ def draw():
         text("%s, %s" % (mouseX,mouseY),width/2,15)        
     
 def mousePressed():
-    wasdclick[4] = 1
+    wasdclick[1] = 1
     
 def mouseReleased():
-    wasdclick[4] = 0
+    wasdclick[1] = 0
     
 def keyPressed():
-    if key == "w":
+    if key == " ":
         wasdclick[0] = 1
-    elif key == "a":
-        wasdclick[1] = 1
-    elif key == "s":
-        wasdclick[2] = 1
-    elif key == "d":
-        wasdclick[3] = 1
         
 def keyReleased():
-    if key == "w":
+    if key == " ":
         wasdclick[0] = 0
-    elif key == "a":
-        wasdclick[1] = 0
-    elif key == "s":
-        wasdclick[2] = 0
-    elif key == "d":
-        wasdclick[3] = 0

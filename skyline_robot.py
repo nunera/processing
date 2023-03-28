@@ -6,10 +6,23 @@ def gen():
         building(170,135,100,2.25)
         building(160,450,100,2)
         building(350,450,130,1.5)
-        
-def hill(distance,Height):
+
+def cloud(dis,Height,z):
+    noStroke()
+    distance = dis - 500
+    fill("#E6E2F9")
+    circle(((-1*(1.0/z)*time)%1600)+distance,100+Height,80)
+    circle((((-1*(1.0/z)*time)%1600)+50)+distance,110+Height,80)
+    circle((((-1*(1.0/z)*time)%1600)+85)+distance,100+Height,40)
+    fill("#B0BEFF")
+    rect(((-1*(1.0/z)*time)%1600)+(distance-50),Height+100,200,50)
+
+def hill(distance,Height,z):
     stroke(0)
     strokeWeight(2)
+    h = Height
+    fill("#31911a")
+    circle(((((-1*(0.2/float(z)))*time)+distance+800)%1600)-400,450-h,400)
 def building(distance,Height,w,z):
     stroke(0)
     strokeWeight(2)
@@ -86,6 +99,17 @@ def draw():
         time = (millis() - m) * speed
         fill("#B0BEFF")
         rect((-1*time)+800,0,time,time+600) 
+        cloud(200,0,20)
+        cloud(0,100,15)
+        hill(330,-25,2.5)
+        hill(760,-75,2.25)
+        hill(440,-100,1.75)
+        hill(670,-30,1.5)
+        hill(870,-150,1.5)
+        hill(440,-125,1.25)
+        hill(250,-50,1)
+        fill("#232323")
+        rect((-1*time),0,800,time+800)
         fill("#32801b")
         rect((-1*time)+800,450,time,50)
         gen()

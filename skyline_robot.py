@@ -37,7 +37,7 @@ def building(distance,Height,w,z):
             rect(((((-1*(float(1)/z))*time)+distance+810+(i*30))%1500)-125,460-h+(u*30),20,20)
 wasdclick = [0,0]
 gamephase = 0
-debug = True
+debug = False
 # 0 = Main Menu, 1 = Options, 2 = Game, 3 = Game over screen
 def setup():
     size(800,500)
@@ -47,12 +47,18 @@ m = 0
 t = False
 circX = 400
 speed = 1
+vel = 100
+delta = 0
 def draw():
     global speed
     global t
     global m
     global gamephase
+    global vel
+    global delta
     if gamephase == 0:
+        vel = 100
+        delta = 0
         background("#232323")
         noStroke()
         fill(255,255,255)
@@ -93,6 +99,21 @@ def draw():
         if mouseX > 345 and mouseY > 310 and mouseX < 460 and mouseY < 350 and wasdclick[1] == 1:
             gamephase = 0
     elif gamephase == 2:
+        vel -= delta
+        if wasdclick[0] == 1 and delta < 7.00:
+            if not(vel < 470):
+                delta = 1
+            if vel > 33.5:
+                delta += 0.1
+            elif delta > 0.1:
+                    delta = (delta * -1) * 0.5
+        else:
+            if not(vel > 33.5):
+                delta = -1
+            elif vel < 470:
+                delta -= 0.1
+            elif delta < 0.1:
+                    delta = (delta * -1) * 0.25
         global time
         background("#232323")
         if t == False:
@@ -120,9 +141,6 @@ def draw():
         rect((-1*time)+800,430,time,15)
         hill(440,-125,1.25)
         hill(250,-50,1)
-        fill("#232323")
-        noStroke()
-        rect((-1*time),0,800,time+800)
         fill("#FFFFAA")
         circle((((.01)*time)%1600)-125,55,100)
         fill("#32801b")
@@ -133,6 +151,11 @@ def draw():
         fill("#FFFFFF")
         text((int(time/100)),width/2,45)
         gen()
+        fill("#00FFAA")
+        circle(100,vel,50)
+        fill("#232323")
+        noStroke()
+        rect((-1*time),0,800,time+800)
         fill("#111111")
         rect(15,10,25,10)
         triangle(15,5,15,25,5,15)

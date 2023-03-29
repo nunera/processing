@@ -40,7 +40,7 @@ def building(distance,Height,w,z,Fill = False):
             rect(((((-1*(float(1)/z))*time)+distance+810+(i*30))%1500)-125,460-h+(u*30),20,20)
 wasdclick = [0,0]
 gamephase = 0
-debug = True
+debug = False
 # 0 = Main Menu, 1 = Options, 2 = Game, 3 = Game over screen
 def setup():
     size(800,500)
@@ -108,7 +108,7 @@ def draw():
                 delta = 2
             if vel > 33.5:
                 delta += 0.2
-            elif delta > 0.1:
+            elif delta > 0.2:
                     delta = (delta * -1) * 0.5
             else:
                 vel = 33.5
@@ -117,7 +117,7 @@ def draw():
                 delta = -2
             elif vel < 470:
                 delta -= 0.2
-            elif delta < 0.1:
+            elif delta < 0.2:
                     delta = (delta * -1) * 0.5
             else:
                 vel = 470 

@@ -25,11 +25,14 @@ def hill(distance,Height,z):
     h = Height
     fill("#31911a")
     circle(((((-1*(0.2/float(z)))*time)+distance+800)%1600)-400,450-h,400)
-def building(distance,Height,w,z):
+def building(distance,Height,w,z,Fill = False):
     stroke(0)
     strokeWeight(2)
     h = (Height-(z*20))
-    fill((z*70-100)%255)
+    if Fill == False:
+        fill((z*70-100)%255)
+    else:
+        fill(Fill)
     rect(((((-1*(float(1)/z))*time)+distance+800)%1500)-125,450-h,w,(h+55)-(z*20))
     for u in range(int(h/30)):
         for i in range(w/30):
@@ -37,7 +40,7 @@ def building(distance,Height,w,z):
             rect(((((-1*(float(1)/z))*time)+distance+810+(i*30))%1500)-125,460-h+(u*30),20,20)
 wasdclick = [0,0]
 gamephase = 0
-debug = False
+debug = True
 # 0 = Main Menu, 1 = Options, 2 = Game, 3 = Game over screen
 def setup():
     size(800,500)
@@ -100,20 +103,24 @@ def draw():
             gamephase = 0
     elif gamephase == 2:
         vel -= delta
-        if wasdclick[0] == 1 and delta < 7.00:
+        if wasdclick[0] == 1 and delta < 9.00:
             if not(vel < 470):
-                delta = 1
+                delta = 2
             if vel > 33.5:
-                delta += 0.1
+                delta += 0.2
             elif delta > 0.1:
                     delta = (delta * -1) * 0.5
+            else:
+                vel = 33.5
         else:
             if not(vel > 33.5):
-                delta = -1
+                delta = -2
             elif vel < 470:
-                delta -= 0.1
+                delta -= 0.2
             elif delta < 0.1:
-                    delta = (delta * -1) * 0.25
+                    delta = (delta * -1) * 0.5
+            else:
+                vel = 470 
         global time
         background("#232323")
         if t == False:

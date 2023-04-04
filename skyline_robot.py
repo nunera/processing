@@ -53,6 +53,7 @@ speed = 1
 vel = 100
 delta = 0
 def draw():
+    dog = loadImage("Fijian_Street_Dog_Color.png")
     global speed
     global t
     global m
@@ -103,24 +104,24 @@ def draw():
             gamephase = 0
     elif gamephase == 2:
         vel -= delta
-        if wasdclick[0] == 1 and delta < 9.00:
+        if wasdclick[0] == 1 and delta < 15.00:
             if not(vel < 470):
                 delta = 2
-            if vel > 33.5:
+            if vel > 55.5:
                 delta += 0.2
             elif delta > 0.2:
                     delta = (delta * -1) * 0.5
             else:
-                vel = 33.5
+                vel = 55.5
         else:
             if not(vel > 33.5):
                 delta = -2
-            elif vel < 470:
+            elif vel < 450:
                 delta -= 0.2
             elif delta < 0.2:
                     delta = (delta * -1) * 0.5
             else:
-                vel = 470 
+                vel = 450 
         global time
         background("#232323")
         if t == False:
@@ -156,10 +157,10 @@ def draw():
         textAlign(CENTER)
         textSize(22)
         fill("#FFFFFF")
-        text((int(time/100)),width/2,45)
+        text((str(time/100)+" floptometers"),width/2,45)
         gen()
         fill("#00FFAA")
-        circle(100,vel,50)
+        image(dog,100,(vel-75),500,150)
         fill("#232323")
         noStroke()
         rect((-1*time),0,800,time+800)
